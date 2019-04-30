@@ -1,3 +1,10 @@
+# 对话式图像搜索机器人
+基于原作者的文章进行了代码调优以及用户体验优化
+1. 支持语音输入关系描述
+2. 历史信息权重可调，加入清空历史记录选项
+3. 支持多用户多线程操作
+4. 返回多张图片，并接收用户反馈作为下轮对话输入
+
 # Dialog-based interactive image retrieval 
 
 ## About this repository
@@ -23,29 +30,10 @@ The project page is available at [https://www.spacewu.com/posts/fashion-retrieva
 ## Dependencies
 To get started with the framework, install the following dependencies:
 - Python 3.6
-- [PyTorch 0.3](https://pytorch.org/get-started/previous-versions/)
+- [PyTorch 0.4.1](https://pytorch.org/get-started/previous-versions/)
 
 ## Dataset
 The  dataset used in the paper is built on the [Attribute Discovery Dataset](http://tamaraberg.com/attributesDataset/index.html). Please refer to the [dataset README](dataset/) for our dataset details. The pre-computed image features and user captioning model can be downloaded from [here](https://ibm.box.com/s/a1zml3pyx4v8yblvy48oyjt1vsbjbkrk). 
-
-
-## Train and evaluate a model
-Follow the following steps to train a model:
-1. Prepare following [dataset instructions](dataset/) or download the pre-computed image features and user captioning model from [here](https://ibm.box.com/s/a1zml3pyx4v8yblvy48oyjt1vsbjbkrk).
-2. Move the pre-computed image features into [features folder](features/) and the user captioning model into [caption_models folder](caption_models/). 
-3. Edit the training script `experiments/scripts/train.sh` such that all paths agree with the files on your file system.
-4. To train the model with the pre-training loss, run:
-```
-python train_sl.py --log-interval=50 --lr=0.001  --batch-size=128 --model-folder="models/"
-```
-The program saves trained models into the folder `models/` every epoch. 
-
-5. To fine-tune the final model with the policy improvement loss, run:
-```
-python train_rl.py --log-interval=10 --lr=0.0001 --top-k=4 --batch-size=128 --tau=0.2 --pretrained-model="models/sl-10.pt" --save-folder="models/"
-```
-The program saves trained models into the folder `models/` every epoch. 
-
 
 ## License
 MIT License
